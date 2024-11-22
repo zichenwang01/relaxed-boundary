@@ -1,0 +1,64 @@
+{
+    "experiment": {
+      "exp_name": null, 
+      "scene_name": null,
+      "output_dir": "./output",
+
+      "num_epoch": 1500,
+      "checkpoint": 300,
+      "upsample": [300, 600, 900, 1200],
+
+      "lr": 0.04,
+      "lr_decay": 2,
+      "lr_downsample": [900],
+      "lr_albedo_scale": 1,
+      "lr_roughness_scale": 1,
+      "laplacian_weight": 1e-5,
+      
+      "num_sensor": 12,
+      "num_sensor_theta": 12,
+      "num_sensor_phi": 1,
+      "batch_size": 6,
+
+      "sdf_res": 32,
+      "sphere_radius": 0.3
+    },
+
+    "rendering": {
+      "sdf_integrator": "sdf-direct-diff",
+      "ref_integrator": "direct",
+
+      "hide_env": true,
+      "background": "white",
+
+      "resx": 512,
+      "resy": 512,
+      "ref_spp": 128,
+      "spp": 64,
+      "spp_grad": 64,
+
+      "sdf_mode": "linear",
+      "itx_eps": 1e-5,
+      "ray_eps": 1e-3,
+      "num_refine": 0,
+      "itx_refine": 1e-5
+    },
+
+    "scene_settings": {
+      "height_ficus": 0.4,
+      "height_lego": 0.35,
+      "height_hotdog": 0.5,
+      "height_chair": 0.6,
+      "radius_chair": 1.5,
+      "default_radius": 1.3,
+      "default_height": 0.4
+    },
+
+    "differentiation": {
+      "sdf_eps": 1e-4,
+      "sdf_deriv_eps": 0.1,
+      "grz_mode": "bisection",
+      "num_grz": 20
+    }
+}
+  

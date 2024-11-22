@@ -1,0 +1,55 @@
+{
+    "experiment": {
+      "exp_name": null, 
+      "scene_name": null,
+      "output_dir": "./output",
+
+      "num_epoch": 5000,
+      "checkpoint": 1000,
+      "upsample": [500, 1000, 2000, 3000],
+
+      "lr": 0.01,
+      "lr_decay": 2,
+      "lr_downsample": [3500, 4000, 4500],
+      "lr_albedo_scale": 1,
+      "lr_roughness_scale": 1,
+      "lr_metallic_scale": 1,
+      "laplacian_weight": 1e-5,
+      
+      "num_sensor": 50,
+      "num_sensor_theta": 24,
+      "num_sensor_phi": 4,
+      "batch_size": 5,
+
+      "sdf_res": 32,
+      "sphere_radius": 0.3
+    },
+
+    "rendering": {
+      "sdf_integrator": "sdf-direct-diff",
+      "ref_integrator": "direct",
+
+      "hide_env": true,
+      "background": "white",
+
+      "resx": 512,
+      "resy": 512,
+      "ref_spp": 256,
+      "spp": 64,
+      "spp_grad": 64,
+
+      "sdf_mode": "linear",
+      "itx_eps": 1e-5,
+      "ray_eps": 1e-3,
+      "num_refine": 0,
+      "itx_refine": 1e-5
+    },
+
+    "differentiation": {
+      "sdf_eps": 1e-4,
+      "sdf_deriv_eps": 0.1,
+      "grz_mode": "bisection",
+      "num_grz": 20
+    }
+}
+  

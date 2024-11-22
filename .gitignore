@@ -1,0 +1,6 @@
+__pycache__/
+data/
+evaluate/__pycache__/
+integrators/__pycache__/
+outputs/
+tmp.txt
