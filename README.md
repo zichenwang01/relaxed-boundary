@@ -18,9 +18,12 @@ conda activate relax
 ```
 Then install the following packages
 ```
-pip install mitsuba numpy matplotlib fastsweep scikit-fmm scikit-image lpips
+pip install mitsuba==3.5
+pip install numpy matplotlib fastsweep scikit-fmm scikit-image lpips
 conda install -c conda-forge ffmpeg
 ```
+
+Lastly, download the [data](https://drive.google.com/file/d/1V3xZqoWvdNVKO0SMT4dp42sdtKK17V8P/view?usp=drive_link) files and unzip it under the project folder.
 
 ## Optimization
 To start running the codes, simply try 
@@ -48,6 +51,13 @@ Here the `--exp_dir` should be the path to the subfolder under `exp/`.
 
 Here we provide a brief walkthrough of the code files in this project. 
 
+- `data/`
+    - For this codebase, we limit the data to be synthetic and within the unit cube.
+    - Each subdirectory should contain the data needed for that one scene, which requires the following parts
+      	- The shapes, usually as `obj` or `ply` files.
+      	- The materials of the shapes, specified in the `XML` file.
+      	- The light source, specified in the `XML` file.
+      	- The `XML` file that specifies how the shapes, materials, and lighting are put together as a scene. Please see the <a href="https://mitsuba.readthedocs.io/en/latest/src/key_topics/scene_format.html"> XML file format</a> for more info.
 - `configs/`
     - `default.json` is the default configuration.
     - `fast.json` provides a faster optimization configuration, often more suitable for only optimizing the geometry (e.g. vbunny).
@@ -63,11 +73,11 @@ Here we provide a brief walkthrough of the code files in this project.
     - `albedo.py`, `geometry.py`, and `normal.py` contain specialized integrators for inverse rendering evaluation.
 - `utils.py` contains global parameters and utility functions.
 - `sdf.py` implements the custom `SDF` class and sphere tracing functions.
-- `train.py` is the main entry point for optimization.
+- `train.py` is the main entry point for optimization. It loads the ground-truth synthetic scene and the cameras to render reference images, runs the main optimization loop, and saves parameters accordingly.
 
 ### Custom Data
 
-For this codebase, we limit the data to be synthetic and within the unit cube. In addition to the meshes and textures, users will need to write a `XML` scene file (see <a href="https://mitsuba.readthedocs.io/en/latest/src/key_topics/scene_format.html"> XML file format</a>). It should contain a similar dummy placeholder as below if the textures are jointly optmized, and the `dummy_sdf` should be the first shape in the scene XML file.
+In addition to the usual shape files and scene `XML` files, users should double-check that the target shapes are within the unit cube. We provide `render.py` for this quick check, which loads a scene and renders a single image from the front. The `XML` file should also contain a similar dummy placeholder as below if the textures are jointly optimized, and the `dummy_sdf` should be the first shape in the `XML` file.
 ```
 <bsdf type="principled" id="main-bsdf">
 	<texture type="volume" name="base_color">
